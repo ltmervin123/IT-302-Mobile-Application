@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/pages/calculator.dart';
 import 'package:my_app/pages/dashboard.dart';
 import 'package:my_app/pages/setting.dart';
 
@@ -20,10 +21,10 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         "/dashboard": (context) => const Dashboard(),
-        "/setting": (context) => const Setting()
+        "/setting": (context) => const Setting(),
+        "/calculator": (context) => const Calculator()
       },
       home: Dashboard(),
     );
   }
 }
-
