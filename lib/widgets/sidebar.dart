@@ -12,10 +12,7 @@ class Sidebar extends StatelessWidget {
       children: [
         DrawerHeader(
           decoration: BoxDecoration(color: Colors.blue),
-          child: Text(
-            "Menu",
-            style: TextStyle(
-                color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
+          child: Text("Menu",style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
           ),
         ),
         ListTile(

@@ -9,7 +9,9 @@ class Setting extends StatelessWidget {
     return Scaffold(
       drawer: Sidebar(),
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: const Text('Setting',style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.blue,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
     );
   }
