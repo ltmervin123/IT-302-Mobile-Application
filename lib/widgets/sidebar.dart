@@ -31,6 +31,11 @@ class Sidebar extends StatelessWidget {
           leading: Icon(Icons.calculate),
           title: Text("Calculator"),
           onTap: () => Navigator.pushNamed(context, "/calculator"),
+        ),
+        ListTile(
+          leading: Icon(Icons.build),
+          title: Text("Converter"),
+          onTap: () => Navigator.pushNamed(context, "/number-system"),
         )
       ],
     ));

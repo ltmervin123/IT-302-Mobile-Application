@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/pages/calculator.dart';
 import 'package:my_app/pages/dashboard.dart';
+import 'package:my_app/pages/numberSystem.dart';
 import 'package:my_app/pages/setting.dart';
 
 void main() {
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       routes: {
         "/dashboard": (context) => const Dashboard(),
         "/setting": (context) => const Setting(),
-        "/calculator": (context) => const Calculator()
+        "/calculator": (context) => const Calculator(),
+        "/number-system" : (context) => const Numbersystem()
       },
       home: Dashboard(),
     );
