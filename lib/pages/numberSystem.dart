@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:my_app/widgets/sidebar.dart';
 
@@ -15,7 +14,28 @@ class _NumbersystemState extends State<Numbersystem> {
   final TextEditingController octalController = TextEditingController();
   final TextEditingController hexController = TextEditingController();
 
-  // Function to convert binary to other systems
+  // Function to show a pop-up warning
+  void showWarningDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Invalid Input'),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
   void updateBinaryValues(String binary) {
     if (binary.isEmpty) {
       decimalController.clear();
@@ -23,83 +43,86 @@ class _NumbersystemState extends State<Numbersystem> {
       hexController.clear();
       return;
     }
-
     try {
-      // Convert the binary input to decimal
       int parsedBinary = int.parse(binary, radix: 2);
-
-      // Update the Decimal, Octal, and Hexadecimal fields
       decimalController.text = parsedBinary.toString();
       octalController.text = parsedBinary.toRadixString(8);
       hexController.text = parsedBinary.toRadixString(16).toUpperCase();
     } catch (e) {
-      // If the input is invalid, clear the fields
-      decimalController.clear();
-      octalController.clear();
-      hexController.clear();
+      showWarningDialog('Please enter a valid binary number (only 0 or 1).');
     }
   }
 
-  void updateDecimalValues(String decimal){
-    // Convert Decimal input to other systems
+  void updateDecimalValues(String decimal) {
     if (decimal.isEmpty) {
       binaryController.clear();
       octalController.clear();
       hexController.clear();
       return;
     }
-    try{
-      int parsedDecimal = int.tryParse(decimal) ?? 0;
+
+    try {
+      int? parsedDecimal = int.tryParse(decimal) ;
+
+      if(parsedDecimal == null){
+        showWarningDialog('Please enter a valid decimal number.');
+        return;
+      }
+
       binaryController.text = parsedDecimal.toRadixString(2);
       octalController.text = parsedDecimal.toRadixString(8);
       hexController.text = parsedDecimal.toRadixString(16).toUpperCase();
-
-    }catch(e){
-      binaryController.clear();
-      octalController.clear();
-      hexController.clear();
+    } catch (e) {
+      showWarningDialog('Please enter a valid decimal number.');
     }
   }
 
-  void updateOctalValues(String octal){
-    if(octal.isEmpty){
+  void updateOctalValues(String octal) {
+    if (octal.isEmpty) {
       decimalController.clear();
       binaryController.clear();
       hexController.clear();
       return;
     }
 
-    try{
-      int decimal = int.tryParse(octal, radix: 8) ?? 0;
+    try {
+      int? decimal = int.tryParse(octal, radix: 8);
+
+      if(decimal == null){
+        showWarningDialog('Please enter a valid octal number (digits 0-7).');
+        return;
+      }
+
       binaryController.text = decimal.toRadixString(2);
       decimalController.text = decimal.toString();
       hexController.text = decimal.toRadixString(16).toUpperCase();
-    }catch(e){
-      decimalController.clear();
-      binaryController.clear();
-      hexController.clear();
+    } catch (e) {
+      showWarningDialog('Please enter a valid octal number (digits 0-7).');
     }
-}
+  }
 
-  void updateHexadecimalValues(String hexa){
-    if(hexa.isEmpty){
+  void updateHexadecimalValues(String hexa) {
+    if (hexa.isEmpty) {
       decimalController.clear();
       binaryController.clear();
       octalController.clear();
       return;
     }
 
-    try{
-      int decimal = int.tryParse(hexa, radix: 16) ?? 0;
+    try {
+      int? decimal = int.tryParse(hexa, radix: 16);
+
+      if(decimal == null){
+        showWarningDialog('Please enter a valid hexadecimal number (0-9, A-F).');
+        return;
+      }
       binaryController.text = decimal.toRadixString(2);
       decimalController.text = decimal.toString();
       octalController.text = decimal.toRadixString(8);
-    }catch(e){
-      decimalController.clear();
-      binaryController.clear();
-      octalController.clear();
+    } catch (e) {
+      showWarningDialog('Please enter a valid hexadecimal number (0-9, A-F).');
     }
-}
+  }
 
   @override
   Widget build(BuildContext context) {
